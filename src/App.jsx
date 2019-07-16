@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { FormGroup, FormControl, InputGroup, Button } from 'react-bootstrap';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
 import Profile from './Profile';
 import Gallery from './Gallery';
 
@@ -56,10 +59,10 @@ class App extends Component {
                                 }
                             }}
                         />
-                        <InputGroup.Addon onCLick={() => this.search()}>
-                            {/* <Glyphicon glyph='search'></Glyphicon> */}
+                        <InputGroup.Prepend onClick={() => this.search()}>
+                            {/*<Glyphicon glyph='search'></Glyphicon>*/}
                             <Button>Submit</Button>
-                        </InputGroup.Addon>
+                        </InputGroup.Prepend>
                     </InputGroup>
                 </FormGroup>
                 {
