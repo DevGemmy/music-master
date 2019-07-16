@@ -13,7 +13,8 @@ class App extends Component {
         super(props);
         this.state = {
             query: '',
-            artist: null
+            artist: null,
+            error: false
         }
     }
 
@@ -29,18 +30,24 @@ class App extends Component {
         })
         .then(response => response.json())
         .then(json => {
-            const artist = json.artists.items[0];
-            this.setState({artist});
+        	try{
+        		const artist = json.artists.items[0];
+	            this.setState({artist});
 
-            FETCH_URL = `${ALBUM_URL}${artist.id}/top-tracks?country=NG&`
-            fetch(FETCH_URL, {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(json => {
-                const { tracks } = json;
-                this.setState({tracks});
-            })
+	            FETCH_URL = `${ALBUM_URL}${artist.id}/top-tracks?country=NG&`
+	            fetch(FETCH_URL, {
+	                method: 'GET'
+	            })
+	            .then(response => response.json())
+	            .then(json => {
+	                const { tracks } = json;
+	                this.setState({tracks});
+	            })
+	            this.setState({error: false});
+        	}catch(e){
+        		this.setState({error: true});
+        	}
+            
         });
     }
 
@@ -78,6 +85,13 @@ class App extends Component {
                             />
                         </div>
                     : <div></div>
+                }
+                {
+                	this.state.error
+                    ?  <div> 
+                            <p style={{color: 'red'}}>{"An error occured!"}</p>
+                        </div>
+                    :  <div></div>
                 }
                 
             </div>
