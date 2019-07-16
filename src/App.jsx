@@ -4,6 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
+import { Glyphicon } from 'react-bootstrap';
 import Profile from './Profile';
 import Gallery from './Gallery';
 
@@ -19,8 +20,9 @@ class App extends Component {
     search() {
         console.log('this.state', this.state);
         const BASE_URL = 'https://api.spotify.com/v1/search?';
-        let FETCH_URL = `${BASE_URL} + 'q=' + ${this.state.query}'&type=artist&limit=1'`;
+        let FETCH_URL = `${BASE_URL}q=${this.state.query}&type=artist&limit=1`;
         const ALBUM_URL = 'https://api.spotify.com/v1/artists/';
+        console.log(FETCH_URL)
 
         fetch(FETCH_URL, {
             method: 'GET'
@@ -59,10 +61,10 @@ class App extends Component {
                                 }
                             }}
                         />
-                        <InputGroup.Prepend onClick={() => this.search()}>
-                            {/*<Glyphicon glyph='search'></Glyphicon>*/}
+                        <InputGroup.Append onClick={() => this.search()}>
+                            {/* <Glyphicon glyph='search'></Glyphicon> */}
                             <Button>Submit</Button>
-                        </InputGroup.Prepend>
+                        </InputGroup.Append>
                     </InputGroup>
                 </FormGroup>
                 {
